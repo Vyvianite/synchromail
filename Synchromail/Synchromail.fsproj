@@ -12,4 +12,9 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.0.0-preview1" />
+    <PackageReference Include="Samboy063.Tomlet" Version="2.0.2" />
+  </ItemGroup>
+
 </Project>
