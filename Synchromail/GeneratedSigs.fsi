@@ -2,9 +2,8 @@
 
 
 
-namespace Synchromail
-    
-    module Main =
-        
-        val main: argv: string[] -> int
+
+module Program
+
+val main: argv: string[] -> int
 
