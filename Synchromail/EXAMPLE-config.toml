@@ -1,0 +1,13 @@
+mailbox = "whatev@gmail.com"
+username = "no"
+password = "secret"
+
+[[rules]]
+address = "yeet@gmail.com"
+blocked = [ "block this pantsgrab" ]
+allowed = [ "yeet", "yeet harder" ]
+
+[[rules]]
+address = "urmum@gmail.com"
+blocked = [ "block this grabpants" ]
+allowed = [ "woot", "woot harder" ]

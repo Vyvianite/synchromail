@@ -3,17 +3,20 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Synchromail</RootNamespace>
+    <RootNamespace>Synchromail</RootNamespace> <!--Doesn't seem to work, unfortunate-->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <OtherFlags>--sig:GeneratedSigs.fsi</OtherFlags>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="Toml.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="3.0.0-preview1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Samboy063.Tomlet" Version="2.0.2" />
   </ItemGroup>
 
