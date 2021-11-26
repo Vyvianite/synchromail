@@ -10,14 +10,12 @@
 
   <ItemGroup>
     <Compile Include="Types.fs" />
-    <Compile Include="Toml.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="3.0.0-preview1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Samboy063.Tomlet" Version="2.0.2" />
+    <PackageReference Include="Samboy063.Tomlet" Version="2.1.0" />
   </ItemGroup>
 
 </Project>

@@ -7,9 +7,9 @@ module Program =
   [<EntryPoint>]
   let main argv =
     try
-      let config = TomlParser.ParseFile("config.toml") |> TomletMain.To<Config>
+      let config = "config.toml" |> TomlParser.ParseFile |> TomletMain.To<Config>
 
-
+      //Set up infrastructure and email api
 
       //printfn $"{TomletMain.TomlStringFrom tomlRead}"
       0

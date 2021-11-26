@@ -29,12 +29,9 @@ namespace Synchromail
         
         [<DefaultValue>]
         val mutable password: string
-
-namespace Synchromail
-    
-    module Toml =
         
-        val g: a: 'a -> string
+        [<DefaultValue>]
+        val mutable rules: Rule array
 
 namespace Synchromail
     
