@@ -9,16 +9,10 @@ namespace Synchromail
         new: unit -> Config
         
         [<DefaultValue>]
-        val mutable Server: string
+        val mutable Mail: Mail
         
         [<DefaultValue>]
-        val mutable Port: int
-        
-        [<DefaultValue>]
-        val mutable Username: string
-        
-        [<DefaultValue>]
-        val mutable Password: string
+        val mutable Synchro: Synchro
         
         [<DefaultValue>]
         val mutable Rules: Rule array
@@ -35,26 +29,46 @@ namespace Synchromail
         
         [<DefaultValue>]
         val mutable Allowed: string array
+    
+    and Mail =
+        
+        new: unit -> Mail
+        
+        [<DefaultValue>]
+        val mutable Server: string
+        
+        [<DefaultValue>]
+        val mutable Port: int
+        
+        [<DefaultValue>]
+        val mutable Username: string
+        
+        [<DefaultValue>]
+        val mutable Password: string
+    
+    and Synchro =
+        
+        new: unit -> Synchro
+        
+        [<DefaultValue>]
+        val mutable Key: string
 
 namespace Synchromail
     
     type Email =
         {
-          subject: string
-          body: string
+          Sender: string
+          Subject: string
+          Body: string
+          Uid: MailKit.UniqueId
         }
     
-    ///<summary>
-    ///Creates and initializes the connction to specified imap server
-    ///<c>can fail</c>
-    ///</summary>
-    ///<exception>Can fail</exception> 
-    ///<returns>fail</returns>
-    type MailApi =
+    module MailApi =
         
-        new: client: MailKit.Net.Imap.ImapClient * config: Config -> MailApi
+        val get:
+          client: MailKit.Net.Imap.ImapClient -> config: Mail -> seq<Email>
         
-        member getUnread: unit -> MailKit.Net.Imap.ImapClient
+        val update: client: 'a -> config: 'b -> emailList: 'c -> unit
 
 namespace Synchromail
     

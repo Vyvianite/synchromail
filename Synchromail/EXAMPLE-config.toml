@@ -1,14 +1,18 @@
+[Mail]
 Server = "whatev@gmail.com"
 Port = 993
 Username = "no"
 Password = "secret"
 
-[[rules]]
+[Synchro]
+Key = "apiKey"
+
+[[Rules]]
 Sender = "yeet@gmail.com"
 Blocked = [ "block this pantsgrab" ]
 Bllowed = [ "yeet", "yeet harder" ]
 
-[[rules]]
+[[Rules]]
 Address = "urmum@gmail.com"
 Blocked = [ "block this grabpants" ]
 Allowed = []

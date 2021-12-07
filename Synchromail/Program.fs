@@ -2,24 +2,23 @@
 
 open Tomlet
 open MailKit.Net.Imap
+open MailApi
 
 module Program =
 
   [<EntryPoint>]
   let main argv =
     try
-      let config = "config.toml" |> TomlParser.ParseFile |> TomletMain.To<Config>
+      let rules, mConf, sConf = 
+        let config = "config.toml" |> TomlParser.ParseFile |> TomletMain.To<Config>
+        config.Rules, config.Mail, config.Synchro
 
-      use client = new ImapClient ()
-      let a = new MailApi (client, config)
+      use client = new ImapClient()
+      let emails = get client mConf
 
-      (* How i want the api to be used
-      use client = new ImapClient ()
-      let api = MailApi (client, config)
-      api.get ()
-      |>  Rule.filter
-      |> api.update
-      *)
+      //parse here
+
+      update client mConf emails
 
       //printfn $"{TomletMain.TomlStringFrom tomlRead}"
       0
