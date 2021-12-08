@@ -24,17 +24,24 @@ module MailApi =
 
     let uids = inbox.Search SearchQuery.NotSeen
 
+    let getEmail (uid: UniqueId) =
+      try
+        let x = inbox.GetMessage uid //Todo make async?
+        { Sender = (Seq.head x.From.Mailboxes).Address
+        ; Subject = x.Subject
+        ; Body = 
+            if isNull x.TextBody then //To prevent massive html dumps into a ticket. Better solution?
+              "Email contained Html only." 
+            else x.TextBody
+        ; Uid = uid }
+        |> Some
+      with
+      | _ as e -> None
+
     let unread  =  
       uids
-      |> Seq.map (fun x -> inbox.GetMessage x, x) //Uid is tupled with the resulting emails
-      |> Seq.map (fun (x, uid) ->
-          { Sender = (Seq.head x.From.Mailboxes).Address
-          ; Subject = x.Subject
-          ; Body = 
-              if isNull x.TextBody then //To prevent massive html dumps into a ticket. Better solution?
-                "Email contained Html only." 
-              else x.TextBody 
-          ; Uid = uid })
+      |> Seq.map getEmail
+      |> Seq.choose id
 
     inbox.AddFlags (uids, MessageFlags.Seen, true);
     //inbox.MoveTo (uids, ...)
