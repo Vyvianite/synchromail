@@ -2,7 +2,6 @@
 
 open Tomlet
 open MailKit.Net.Imap
-open MailApi
 
 module Program =
 
@@ -13,12 +12,13 @@ module Program =
         let config = "config.toml" |> TomlParser.ParseFile |> TomletMain.To<Config>
         config.Rules, config.Mail, config.Synchro
 
-      use client = new ImapClient()
-      let emails = get client mConf
+      use mailApi =
+        match MailApi.tryCreate mConf with
+        | Ok x -> x
+        | _ as x -> failwith "Failed to connect." //HACK there's gotta be a better way to do this, i'm just too tired to see it. maybe
 
-      //parse here
+      let unread = mailApi.getUnread ()
 
-      update client mConf emails
 
       //printfn $"{TomletMain.TomlStringFrom tomlRead}"
       0
